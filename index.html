@@ -1,134 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contract Value Counter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
-            text-align: center;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 90%;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-        .counter {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 1.5rem 0;
-        }
-        .info {
-            margin-top: 1.5rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        .info p {
-            margin: 0.5rem 0;
-        }
-        .percent {
-            font-size: 1.5rem;
-            color: #27ae60;
-            margin: 1rem 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Contract Value Counter</h1>
-        <div>
-            <div class="counter" id="counter">0.00 BGN</div>
-            <div class="percent" id="percent">0.00%</div>
-        </div>
-        <div class="info">
-            <p><strong>Contract Start Date:</strong> January 3, 2023</p>
-            <p><strong>Contract End Date:</strong> December 31, 2035</p>
-            <p><strong>Total Contract Value:</strong> 4,200,000,000.00 BGN</p>
-            <p><strong>Current Date:</strong> <span id="current-date"></span></p>
-        </div>
-    </div>
+---
+layout: default
+title: Боташ кючек
+custom_css:
+  - contract-counter
+custom_js:
+  - contract-counter
+---
 
-    <script>
-        // Contract details
-        const startDate = new Date('2023-01-03T00:00:00');
-        const endDate = new Date('2035-12-31T23:59:59');
-        const totalValue = 4200000000; // 4.2 billion BGN
-        
-        // Calculate total duration in milliseconds
-        const totalDuration = endDate.getTime() - startDate.getTime();
-        
-        // Update counter function
-        function updateCounter() {
-            // Get current time
-            const now = new Date();
-            
-            // Display current date
-            document.getElementById('current-date').textContent = now.toLocaleString();
-            
-            // If before start date, show 0
-            if (now < startDate) {
-                document.getElementById('counter').textContent = '0.00 BGN';
-                document.getElementById('percent').textContent = '0.00%';
-                return;
-            }
-            
-            // If after end date, show total
-            if (now > endDate) {
-                document.getElementById('counter').textContent = totalValue.toLocaleString('bg-BG', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }) + ' BGN';
-                document.getElementById('percent').textContent = '100.00%';
-                return;
-            }
-            
-            // Calculate elapsed time in milliseconds
-            const elapsedTime = now.getTime() - startDate.getTime();
-            
-            // Calculate percentage of time elapsed
-            const percentageElapsed = elapsedTime / totalDuration;
-            
-            // Calculate current value
-            const currentValue = totalValue * percentageElapsed;
-            
-            // Format the currency
-            const formattedValue = currentValue.toLocaleString('bg-BG', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-            
-            // Format the percentage
-            const formattedPercentage = (percentageElapsed * 100).toLocaleString('bg-BG', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-            
-            // Update counter and percentage display
-            document.getElementById('counter').textContent = formattedValue + ' BGN';
-            document.getElementById('percent').textContent = formattedPercentage + '%';
-        }
-        
-        // Update immediately on page load
-        updateCounter();
-        
-        // Update every second
-        setInterval(updateCounter, 1000);
-    </script>
-</body>
-</html>
+<div class="container">
+    <h1>Платени по договора с БОТАШ до днес</h1>
+    <h3>(<span id="current-date"></span>):</h3>
+    <div>
+        <div class="counter" id="counter">0.00 BGN</div>
+        <div class="percent" id="percent">0.00%</div>
+    </div>
+    <div class="info">
+        <p><strong>Начална дата:</strong> 3 януари 2023</p>
+        <p><strong>Край:</strong> 31 декември 2035</p>
+        <p><strong>Обща стойност (без индексациите):</strong> 4 200 000 000 BGN</p>
+    </div>
+</div>
