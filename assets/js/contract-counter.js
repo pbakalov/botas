@@ -1,9 +1,8 @@
-// Contract details
 const startDate = new Date('2023-01-03T00:00:00');
 const endDate = new Date('2035-12-31T23:59:59');
 const totalValue = 4200000000; // 4.2 billion BGN
 
-// Calculate total duration in milliseconds
+// total duration in milliseconds
 const totalDuration = endDate.getTime() - startDate.getTime();
 
 // Format number with animation
@@ -14,7 +13,6 @@ function animateValue(element, start, end, duration) {
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const currentValue = progress * (end - start) + start;
         
-        // Format based on element type
         if (element.id === 'counter') {
             element.textContent = currentValue.toLocaleString('bg-BG', {
                 minimumFractionDigits: 2,
@@ -34,26 +32,20 @@ function animateValue(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Previous values for animation
 let prevValue = 0;
 let prevPercentage = 0;
 
-// Update counter function
 function updateCounter() {
-    // Get current time
     const now = new Date();
     
-    // Display current date
-    document.getElementById('current-date').textContent = now.toLocaleString();
+    document.getElementById('current-date').textContent = now.toLocaleString('bg-BG');
     
-    // If before start date, show 0
     if (now < startDate) {
         document.getElementById('counter').textContent = '0.00 BGN';
         document.getElementById('percent').textContent = '0.00%';
         return;
     }
     
-    // If after end date, show total
     if (now > endDate) {
         document.getElementById('counter').textContent = totalValue.toLocaleString('bg-BG', {
             minimumFractionDigits: 2,
